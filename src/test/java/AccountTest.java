@@ -34,7 +34,7 @@ public class AccountTest {
         calendar.set(2012, Calendar.JANUARY, 10);
         account.deposit(calendar.getTime(), 100);
         String report = account.getReport();
-        assertThat(report, equalTo("DATE | AMOUNT | BALANCE\n10/01/2012 | 100.00 | 100.00\n"));
+        assertThat(report, equalTo("DATE | AMOUNT | BALANCE\n10/01/2012 | 100,00 | 100,00\n"));
     }
 
 }
