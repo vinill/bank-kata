@@ -1,9 +1,18 @@
+import Account.Account;
 import org.junit.Test;
+
+import java.io.PrintStream;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class AccountTest {
-    @Test public void shouldReturnNoTransactionWhenCreated{
+    @Test public void shouldReturnNoTransactionWhenCreated (){
         Account account = new Account();
 
         String stmt = account.getStatement();
@@ -11,7 +20,7 @@ public class AccountTest {
         assertThat(stmt, is("DATE | AMOUNT | BALANCE\n"));
     }
 
-    @Test public void shouldPrintNoTransactionsWhenCreated{
+    @Test public void shouldPrintNoTransactionsWhenCreated(){
         PrintStream printStream = mock(PrintStream.class);
         Account account = new Account();
         account.print(printStream);
