@@ -42,12 +42,25 @@ public class AccountTest {
         Calendar calendar = new GregorianCalendar();
         calendar.clear();
         calendar.set(2012, Calendar.JANUARY, 10);
-        account.deposit(calendar.getTime(), 1000);
-        //Wplacam 1000
         account.withdraw(calendar.getTime(), 500);
-        //Wyplacam 500
         String report = account.getReport();
         assertThat(report, equalTo("DATE | AMOUNT | BALANCE\n10/01/2012 | -500,00 | 500,00\n"));
     }
 
+    @Test public void shouldReportHistoryOfTransactions() {
+        Account account = new Account();
+        Calendar calendar = new GregorianCalendar();
+        calendar.clear();
+        calendar.set(2014, Calendar.APRIL, 1);
+        account.deposit(calendar.getTime(), 1000);
+        calendar.clear();
+        calendar.set(2014, Calendar.APRIL, 2);
+        account.withdraw(calendar.getTime(), 100);
+        calendar.clear();
+        calendar.set(2014, Calendar.APRIL, 10);
+        account.deposit(calendar.getTime(), 500);
+        String report = account.getReport();
+        assertThat(report, equalTo("DATE | AMOUNT | BALANCE\n10/04/2014 | 500,00 | 1 400,00\n02/04/2014 | -100,00 | 900,00\n01/04/2014 | 1 000,00 | 1 000,00\n"));
+
+    }
 }

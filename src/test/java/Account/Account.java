@@ -10,6 +10,7 @@ public class Account {
     private float balance;
     private float lastTransaction;
     String header = "DATE | AMOUNT | BALANCE\n";
+    String transactions = "";
 
     public void print(PrintStream printStream) {
 
@@ -21,23 +22,30 @@ public class Account {
         lastDate=time;
         lastTransaction = i;
         balance += i;
-
+        addTransaction();
     }
 
     public String getReport() {
         if (lastDate == null)
             return header;
+        return header + transactions;
+    }
+
+    private String addTransaction(){
+
 
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         DecimalFormat decimalFormat = new DecimalFormat();
         decimalFormat.setMaximumFractionDigits(2);
         decimalFormat.setMinimumFractionDigits(2);
-        return header + format.format(lastDate) + " | " +  decimalFormat.format(lastTransaction) + " | " + decimalFormat.format(balance) + "\n";
+        transactions = format.format(lastDate) + " | " +  decimalFormat.format(lastTransaction) + " | " + decimalFormat.format(balance) + "\n" + transactions;
+        return transactions;
     }
 
     public void withdraw(Date time, int i) {
         lastDate = time;
         lastTransaction = -i;
         balance -= i;
+        addTransaction();
     }
 }
