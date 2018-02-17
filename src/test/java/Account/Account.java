@@ -11,10 +11,6 @@ public class Account {
     private float lastTransaction;
     String header = "DATE | AMOUNT | BALANCE\n";
 
-    public String getStatement() {
-        return null;
-    }
-
     public void print(PrintStream printStream) {
 
         printStream.print(header);
@@ -24,7 +20,7 @@ public class Account {
     public void deposit(Date time, int i) {
         lastDate=time;
         lastTransaction = i;
-        balance = i;
+        balance += i;
 
     }
 
@@ -37,5 +33,11 @@ public class Account {
         decimalFormat.setMaximumFractionDigits(2);
         decimalFormat.setMinimumFractionDigits(2);
         return header + format.format(lastDate) + " | " +  decimalFormat.format(lastTransaction) + " | " + decimalFormat.format(balance) + "\n";
+    }
+
+    public void withdraw(Date time, int i) {
+        lastDate = time;
+        lastTransaction = -i;
+        balance -= i;
     }
 }
